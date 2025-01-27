@@ -28,15 +28,6 @@ class AuthController {
         try {
 
             var query: any = req.query;
-            var status: string, where: any;
-
-            // var dbQuery: any = " SELECT * FROM chat";
-            // if (query.status) {
-            //     status = query.status;
-            //     where = ` WHERE status=${query.status}`;
-            //     dbQuery = dbQuery + where;
-            // }
-            // console.log(dbQuery);
             var dbQuery = 'SELECT * from `chat` WHERE 1=1 ';
             if (query.status) {
                 dbQuery += 'AND `status` = '+ db.escape(query.status);
@@ -45,8 +36,6 @@ class AuthController {
             if (chats) Responder.sendSuccessDataMessage(chats, "chats", res)
             else return Responder.sendFailureMessage("Unable  get chats", res)
         } catch (err: any) {
-            console.log(err);
-
             return Responder.sendFailureMessage(err.message, res)
         }
     }

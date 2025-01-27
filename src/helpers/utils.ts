@@ -12,8 +12,6 @@ class UtilsController {
     }
 
     comparePassword = async (pwd: string, hashPassword: string) => {
-        console.log(pwd, hashPassword);
-
         return await bcrypt.compare(pwd, hashPassword);
     }
 }
