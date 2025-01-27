@@ -6,6 +6,7 @@ class AuthController {
     createUser = async (req: Request, res: Response) => {
         try {
             const data = req.body;
+            if(!data.email || !data.password ) return Responder.sendFailureMessage("Invalid data", res)
             const user = await Utils.getUserDetail(data.email);
             if (user) return Responder.sendFailureMessage("Already Exist", res)
             const insert = await db.query('INSERT INTO users (id, email, password) values(?, ? ,? )', [uuidv4(), data.email, await Utils.hashPassword(data.password)])
